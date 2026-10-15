@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Siswa - Muhammad Insan</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(
+                180deg,
+                #061b3a 0%,
+                #075985 45%,
+                #06b6d4 100%
+            );
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px 100px;
+            position: relative;
+        }
+
+        /* Hiasan gelembung laut */
+        .bubble {
+            position: fixed;
+            bottom: -100px;
+            border: 2px solid rgba(255,255,255,0.35);
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            animation: naik 12s infinite ease-in;
+            pointer-events: none;
+        }
+
+        .bubble:nth-child(1) {
+            width: 35px;
+            height: 35px;
+            left: 10%;
+            animation-duration: 9s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 55px;
+            height: 55px;
+            left: 80%;
+            animation-duration: 13s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            left: 60%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 45px;
+            height: 45px;
+            left: 30%;
+            animation-duration: 14s;
+            animation-delay: 1s;
+        }
+
+        @keyframes naik {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.8;
+            }
+            85% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(35px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ocean-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .ocean-title .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 5px 10px #001b35);
+        }
+
+        .ocean-title h1 {
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .ocean-title p {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #bae6fd;
+            letter-spacing: 1px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            color: #0c3557;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 15, 40, 0.4);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .profile {
+            text-align: center;
+            padding: 30px 20px 25px;
+            background: linear-gradient(
+                135deg,
+                #dff8ff,
+                #bae6fd
+            );
+        }
+
+        .avatar {
+            width: 105px;
+            height: 105px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7, #0e7490);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            border: 5px solid white;
+            box-shadow: 0 6px 20px rgba(2,132,199,0.3);
+        }
+
+        .profile h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #082f49;
+        }
+
+        .class-badge {
+            display: inline-block;
+            background: #0369a1;
+            color: white;
+            padding: 7px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .details {
+            padding: 25px;
+        }
+
+        .details h3 {
+            font-size: 18px;
+            margin-bottom: 18px;
+            color: #0369a1;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 15px 0;
+            border-bottom: 1px solid #dbeafe;
+        }
+
+        .info:last-of-type {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e0f2fe;
+            border-radius: 12px;
+            font-size: 21px;
+        }
+
+        .info-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-text small {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .info-text strong {
+            font-size: 14px;
+            color: #0c3557;
+            overflow-wrap: anywhere;
+        }
+
+        .toggle-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #0284c7, #0e7490);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(2,132,199,0.25);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            color: #e0f2fe;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 65px;
+            opacity: 0.22;
+            background: rgba(255,255,255,0.65);
+            border-radius: 45% 50% 0 0;
+            animation: ombak 8s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        .wave.two {
+            height: 40px;
+            opacity: 0.15;
+            animation-duration: 11s;
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes ombak {
+            from {
+                transform: translateX(-15%) rotate(-2deg);
+            }
+            to {
+                transform: translateX(-35%) rotate(2deg);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .ocean-title h1 {
+                font-size: 23px;
+            }
+
+            .profile h2 {
+                font-size: 21px;
+            }
+
+            .details {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <main class="container">
+
+        <header class="ocean-title">
+            <span class="icon">🌊</span>
+            <h1>OCEAN PROFILE</h1>
+            <p>BIODATA SISWA</p>
+        </header>
+
+        <section class="card">
+
+            <div class="profile">
+                <div class="avatar">MI</div>
+                <h2>Muhammad Insan</h2>
+                <span class="class-badge">🎓 KELAS X TJKT 1</span>
+            </div>
+
+            <div class="details">
+                <h3>🐚 Informasi Siswa</h3>
+
+                <div id="biodata">
+                    <div class="info">
+                        <div class="info-icon">👤</div>
+                        <div class="info-text">
+                            <small>Nama Lengkap</small>
+                            <strong>Muhammad Insan</strong>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <div class="info-icon">🏫</div>
+                        <div class="info-text">
+                            <small>Kelas</small>
+                            <strong>X TJKT 1</strong>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <div class="info-icon">🎂</div>
+                        <div class="info-text">
+                            <small>Umur</small>
+                            <strong>16 Tahun</strong>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <div class="info-icon">⚧️</div>
+                        <div class="info-text">
+                            <small>Jenis Kelamin</small>
+                            <strong>Laki-laki</strong>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <div class="info-icon">🏛️</div>
+                        <div class="info-text">
+                            <small>Nama Sekolah</small>
+                            <strong>SMK Banjar Asri</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                    class="toggle-btn"
+                    id="toggleBtn"
+                    onclick="toggleBiodata()">
+                    🌊 Sembunyikan Biodata
+                </button>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>🐬 Explore the Ocean of Knowledge 🐬</p>
+            <p>&copy; 2026 Muhammad Insan | X TJKT 1</p>
+        </footer>
+
+    </main>
+
+    <div class="wave"></div>
+    <div class="wave two"></div>
+
+    <script>
+        function toggleBiodata() {
+            const biodata = document.getElementById("biodata");
+            const button = document.getElementById("toggleBtn");
+
+            if (biodata.style.display === "none") {
+                biodata.style.display = "block";
+                button.textContent = "🌊 Sembunyikan Biodata";
+            } else {
+                biodata.style.display = "none";
+                button.textContent = "🐠 Tampilkan Biodata";
+            }
+        }
+    </script>
+
+</body>
+</html>
